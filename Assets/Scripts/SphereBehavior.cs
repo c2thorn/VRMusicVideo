@@ -10,6 +10,7 @@ public class SphereBehavior : MonoBehaviour {
     public Marimbas marimbas;
     public Maracas maracas;
     public Claps claps;
+    public Bass bass;
 
     public Text text;
 
@@ -45,20 +46,24 @@ public class SphereBehavior : MonoBehaviour {
                 maracas.playing = false;
                 marimbas.playing = false;
                 claps.playing = false;
+                bass.playing = false;
                 break;
             case 1:
                 maracas.playing = true;
                 marimbas.playing = true;
+                bass.playing = true;
                 break;
             case 14:
                 maracas.playing = false;
                 break;
             case 15:
                 marimbas.playing = false;
+                bass.playing = false;
                 break;
             case 16:
                 marimbas.playing = true;
                 maracas.playing = true;
+                bass.playing = true;
                 break;
             case 65:
                 claps.playing = true;
@@ -74,6 +79,7 @@ public class SphereBehavior : MonoBehaviour {
                 break;
             case 131:
                 marimbas.playing = false;
+                bass.playing = false;
                 break;
             case 132:
                 claps.playing = false;
