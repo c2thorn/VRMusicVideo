@@ -19,6 +19,7 @@ public class Marimbas : MonoBehaviour
     public float maxIntensity = 1f;     // The maximum intensity the flash will reach
     private IEnumerator coroutine;
 
+
     void Start()
     {
         beatObserver = GetComponent<BeatObserver>();
@@ -46,7 +47,10 @@ public class Marimbas : MonoBehaviour
 
             if (beatCounter != 10 && beatCounter != 19)
                 Play();
-            beatCounter = (++beatCounter == 20 ? 0 : beatCounter);
+
+            beatCounter++;
+            if (beatCounter > 19)
+                beatCounter = 0;
         }
     }
 
@@ -60,13 +64,15 @@ public class Marimbas : MonoBehaviour
     {
         if (playing)
         {
+            //StopAllCoroutines();
+
             if (rightTurn)
                 coroutine = flashNow(right);
             else
                 coroutine = flashNow(left);
+
             rightTurn = !rightTurn;
             StartCoroutine(coroutine);
-            //particleBurst.Play();
         }
     }
 

@@ -145,7 +145,7 @@ class OVRMoonlightLoader
 		// Don't warn if the project may be set up for submission or global signing.
 		if (File.Exists("Assets/Plugins/Android/AndroidManifest.xml"))
 			return;
-		
+        return;
 		var files = Directory.GetFiles("Assets/Plugins/Android/assets");
 		bool foundPossibleOsig = false;
 		for (int i = 0; i < files.Length; ++i)

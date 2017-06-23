@@ -68,12 +68,13 @@ public class SphereBehavior : MonoBehaviour {
             case 65:
                 claps.playing = true;
                 break;
+                /*
             case 80:
                 claps.playing = false;
                 break;
             case 82:
                 claps.playing = true;
-                break;
+                break;*/
             case 112:
                 maracas.playing = false;
                 break;
@@ -84,29 +85,45 @@ public class SphereBehavior : MonoBehaviour {
             case 132:
                 claps.playing = false;
                 break;
+            case 133:
+                break;
             case 136:
                 claps.playing = true;
                 marimbas.playing = true;
+                break;
+            case 137:
+                bass.playing = true;
                 break;
             case 138:
                 claps.playing = false;
                 marimbas.playing = false;
                 break;
+            case 139:
+                bass.playing = false;
+                break;
             case 145:
                 marimbas.playing = true;
                 claps.playing = true;
+                bass.playing = true;
                 break;
             case 147:
                 maracas.playing = false;
                 marimbas.playing = false;
                 claps.playing = false;
+                bass.playing = false;
                 break;
             case 159:
                 marimbas.playing = true;
+                bass.playing = true;
                 break;
             case 161:
                 maracas.playing = true;
                 claps.playing = true;
+                break;
+            case 226:
+                maracas.playing = false;
+                marimbas.playing = false;
+                bass.playing = false;
                 break;
         }
 

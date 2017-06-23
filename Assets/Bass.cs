@@ -5,9 +5,6 @@ using SynchronizerData;
 public class Bass : MonoBehaviour
 {
     private BeatObserver beatObserver;
-    private ParticleSystem particleBurst;
-
-    private ParticleSystem.MainModule main;
 
     private int beatCounter;
 
@@ -16,17 +13,17 @@ public class Bass : MonoBehaviour
     public float maxIntensity = 1f;     // The maximum intensity the flash will reach
     private Light myLight;        // Your light
     private IEnumerator coroutine;
-
+    private bool firstBeat;
+    private float size;
+    public float maxSize = 5f;
     void Start()
     {
         beatObserver = GetComponent<BeatObserver>();
-        particleBurst = GetComponent<ParticleSystem>();
         myLight = GetComponent<Light>();
         beatCounter = 0;
         playing = true;
-        main = particleBurst.main;
-
-        main.startLifetime = .30f;
+        firstBeat = true;
+        size = 2f;
     }
 
 
@@ -36,25 +33,63 @@ public class Bass : MonoBehaviour
         {
             if (beatCounter == 24)
                 myLight.color = Color.yellow;
-            else if (beatCounter == 2)
+            else if (beatCounter == 1)
                 myLight.color = Color.cyan;
-            else if (beatCounter == 41)
+            else if (beatCounter == 42)
                 myLight.color = Color.magenta;
-            Play();
-            beatCounter = (++beatCounter == 43 ? 0 : beatCounter);
+            if (beatCounter != 9 && beatCounter != 20 && beatCounter != 31)
+                Play();
+            beatCounter++;
+            if (beatCounter > 42)
+                beatCounter = 0;
         }
+        // Rotate the object around its local X axis at 1 degree per second
+        transform.Rotate(Vector3.right * Time.deltaTime * 5);
+
+        // ...also rotate around the World's Y axis
+        transform.Rotate(Vector3.up * Time.deltaTime * 5);
     }
 
     void Play()
     {
         if (playing)
         {
-            coroutine = flashNow();
-            StartCoroutine(coroutine);
+            if (!firstBeat)
+            {
+                StopAllCoroutines();
+                size = 2f;
+                //myLight.intensity = 0;
+                transform.localScale = new Vector3(2, 2, 2);
+
+                coroutine = pulse();
+                StartCoroutine(coroutine);
+            }
+            else
+                firstBeat = false;
         }
-        //particleBurst.Play();
     }
 
+    public IEnumerator pulse()
+    {
+        float waitTime = totalSeconds / 2;
+
+        // Get half of the seconds (One half to get brighter and one to get darker)
+        while (size < maxSize)
+        {
+            size += Time.deltaTime / waitTime;        // Increase intensity
+            myLight.range = size + .5f;
+            transform.localScale = new Vector3(size, size, size);
+            yield return null;
+        }
+        while (size > 2)
+        {
+            size -= Time.deltaTime / waitTime;        //Decrease intensity
+            myLight.range = size + .5f;
+            transform.localScale = new Vector3(size, size, size);
+            yield return null;
+        }
+        yield return null;
+    }
 
     public IEnumerator flashNow()
     {

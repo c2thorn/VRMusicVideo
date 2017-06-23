@@ -31,13 +31,13 @@ public class Maracas : MonoBehaviour
             {
                 main.startLifetime = .30f;
                 main.startColor = Color.white;
-                Play();
+                //Play();
             }
             else if (beatCounter == 2)
             {
                 main.startColor = Color.green;
                 main.startLifetime = .5f;
-                Play();
+                //Play();
             }
             beatCounter = (++beatCounter == 4 ? 0 : beatCounter);
         }
