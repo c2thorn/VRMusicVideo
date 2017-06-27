@@ -50,6 +50,11 @@ public class Bass : MonoBehaviour
         transform.Rotate(Vector3.up * Time.deltaTime * 5);
     }
 
+    public void End()
+    {
+        myLight.color = Color.cyan;
+    }
+
     void Play()
     {
         if (playing)

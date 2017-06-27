@@ -313,6 +313,10 @@ public class SphereBehavior : MonoBehaviour {
                 Instantiate(prefab);
                 lyrics_text.text = "Listen to more Smino on\nblkswn";
                 break;
+            case 332:
+                //Song ends
+                bass.End();
+                break;
         }
 
 
